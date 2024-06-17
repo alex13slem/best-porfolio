@@ -1,0 +1,12 @@
+.logo-animation {
+  animation: logo-animation 2s ease infinite alternate;
+}
+
+@keyframes logo-animation {
+  from {
+    filter: drop-shadow(0 0 8px #f2cb9fbd);
+  }
+  to {
+    filter: drop-shadow(0 0 15px #f2cb9f);
+  }
+}

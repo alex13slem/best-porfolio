@@ -1,0 +1,8 @@
+.gradient-experience__1 {
+  will-change: transform;
+  background-image: linear-gradient(180deg, #00c2ff, #ff29c3);
+}
+.gradient-experience__2 {
+  will-change: transform;
+  background-image: linear-gradient(180deg, #184bff, #174aff);
+}

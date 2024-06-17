@@ -1,0 +1,35 @@
+.animated-colors__gradient,
+.colors__gradient {
+  will-change: transform;
+  background-image: radial-gradient(
+      66.11% 66.11% at 50% 33.89%,
+      hsla(0, 0%, 100%, 0.4) 0,
+      hsla(0, 0%, 100%, 0) 100%
+    ),
+    linear-gradient(
+      278.88deg,
+      #fff,
+      #66e3ff 28.83%,
+      #a787ff 56.31%,
+      #ffc875 86.49%
+    );
+}
+
+.animated-colors__gradient {
+  background-size: 200% 200%;
+  animation: animate-colors__gradient 10s ease infinite;
+}
+
+@keyframes animate-colors__gradient {
+  0% {
+    background-position: 0 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  to {
+    background-position: 0 50%;
+  }
+}

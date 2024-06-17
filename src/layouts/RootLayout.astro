@@ -1,0 +1,58 @@
+---
+import { ViewTransitions } from 'astro:transitions';
+import type { HTMLAttributes } from 'astro/types';
+import Head, { type HeadProps } from '$components/Head.astro';
+import Header from '$components/Header/index.astro';
+import Footer from '$components/Footer/index.astro';
+// import '$assets/fonts/satoshi-font.css';
+import '$styles/app.css';
+
+export interface HtmlProps
+  extends Omit<HTMLAttributes<'html'>, 'title'>,
+    HeadProps {
+  favicon?: string;
+  hasHeader?: boolean;
+  hasFooter?: boolean;
+}
+
+const {
+  class: className,
+  hasHeader = true,
+  hasFooter = true,
+  favicon = '/favicon.svg',
+  noindex,
+  ...props
+}: HtmlProps = Astro.props;
+---
+
+<html lang="ru" class="scroll-smooth" {...props}>
+  <Head {favicon} {noindex}>
+    <slot name="seo" />
+    <meta name="referrer" content="origin" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap"
+      rel="stylesheet"
+    />
+    <ViewTransitions />
+  </Head>
+  <body class={className}>
+    <div class="fixed inset-0 -z-10 pointer-events-none opacity-90 bg-noise">
+    </div>
+    {hasHeader && <Header />}
+    <slot />
+    {hasFooter && <Footer />}
+    <style>
+      body {
+        @apply relative 
+        min-h-svh 
+        bg-slate 
+        z-0
+        overflow-x-hidden 
+        tracking-wide
+        text-white;
+      }
+    </style>
+  </body>
+</html>

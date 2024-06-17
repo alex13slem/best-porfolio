@@ -1,0 +1,10 @@
+@import './animate-gradient__rotate.css';
+@import './animated-colors__gradient.css';
+@import './logo-animation.css';
+@import './gradients.css';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+}

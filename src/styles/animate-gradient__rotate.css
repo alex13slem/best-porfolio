@@ -1,0 +1,71 @@
+.animate-gradient__rotate i {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  padding: 2px;
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 0.2s;
+}
+
+.animate-gradient__rotate:hover i:before {
+  opacity: 1;
+  animation: hover-spin__animation 5s linear infinite;
+}
+
+.animate-gradient__rotate i:before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  display: block;
+  border-radius: 9999px;
+  opacity: 0;
+  background: conic-gradient(
+    from 180deg at 50% 50%,
+    #ffc8752c 0deg,
+    #ffeaca 10deg,
+    #ffc875 25deg,
+    #a787ff 112.5deg,
+    #66e3ff 203.75deg,
+    #d2f7ff 213.75deg,
+    #66e3ff 228.75deg,
+    rgba(42, 138, 246, 0) 1turn
+  );
+  width: calc(100% * 2);
+  padding-bottom: calc(100% * 2);
+  transform: translate(-50%, -50%);
+  z-index: -1;
+  will-change: transform;
+  transition: opacity 0.2s;
+}
+
+.animate-gradient__activeXs.animate-gradient__rotate i:before {
+  opacity: 1;
+}
+
+@media (min-width: 1024px) {
+  .animate-gradient__activeXs.animate-gradient__rotate i:before {
+    opacity: 0;
+  }
+}
+
+.animate-gradient__activeXs.animate-gradient__rotate i:before {
+  animation: hover-spin__animation 5s linear infinite;
+}
+
+.animate-gradient__activeXs.animate-gradient__rotate:hover i:before {
+  opacity: 1;
+  animation: hover-spin__animation 5s linear infinite;
+}
+
+@keyframes hover-spin__animation {
+  0% {
+    transform: translate(-50%, -50%) rotate(1turn);
+  }
+
+  to {
+    transform: translate(-50%, -50%) rotate(0);
+  }
+}

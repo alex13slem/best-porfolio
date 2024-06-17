@@ -1,0 +1,10 @@
+@font-face {
+  font-family: 'Shadows Into';
+  src: local('Shadows Into Light'), local('ShadowsIntoLight'),
+    url('./ShadowsIntoLight.woff2') format('woff2'),
+    url('./ShadowsIntoLight.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+  color: #1b2227;
+}

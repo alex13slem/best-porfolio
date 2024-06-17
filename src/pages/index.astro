@@ -1,16 +1,20 @@
 ---
-
+import RootLayout from '$layouts/RootLayout.astro';
+import SEO from '$components/SEO.astro';
+import Header from '$components/Header/index.astro';
+import SectHero from '../sections/SectHero.astro';
+import SectPortfolioCards from '../sections/SectPortfolioCards.astro';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<RootLayout>
+  <SEO
+    slot="seo"
+    title="JavaScript разработчик"
+    description="!!!"
+    imageUrls={{ fb: '' }}
+  />
+  <main>
+    <SectHero />
+    <SectPortfolioCards />
+  </main>
+</RootLayout>

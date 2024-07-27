@@ -1,0 +1,33 @@
+---
+export const prerender = false;
+
+import { createAstroServerClient } from '@/lib/supabase/createAstroServerClient';
+import { getUser } from '@/lib/utils';
+import Button from '@/components/ui/firm-button';
+import AdminLayout from '@/layouts/admin-layout.astro';
+import SEO from '@/components/seo.astro';
+import { getSocials } from '@/lib/drizzle/queries/socials';
+import DataTable from '@/components/tables/socials/data-table';
+
+const supabase = createAstroServerClient(Astro);
+
+const user = await getUser(supabase);
+if (!user) {
+  console.log('User is not logged in');
+  return Astro.redirect('/auth/login');
+}
+
+const socials = await getSocials();
+---
+
+<AdminLayout>
+  <SEO slot="seo" title="Соц. сети" imageUrls={{ fb: '' }} />
+  <div class="flex justify-between items-center">
+    <h1 class="text-4xl">Соц. сети</h1>
+    <Button variant={'fill'} className="relative">
+      <a href="/admin/socials/create" class="absolute inset-0"></a>
+      Добавить соц. сеть
+    </Button>
+  </div>
+  <DataTable data={socials} className="mt-5" client:load />
+</AdminLayout>

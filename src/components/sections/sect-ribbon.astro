@@ -1,0 +1,29 @@
+---
+import { getTechnologies } from '@/lib/drizzle/queries/technologies';
+import { cn } from '@/lib/utils';
+
+const technologies = await getTechnologies();
+const keywords = technologies.map((tech) => tech.name);
+// const keywords = ['javascript', 'frontend', 'backend', 'developer'];
+
+const keywordsString = (keywords.join(' · ') + ' · ').repeat(4);
+---
+
+<section class="relative py-16 z-20 overflow-clip">
+  <p
+    class={cn(`
+		group
+		uppercase font-extrabold text-[40px] whitespace-nowrap text-bg leading-loose
+		rotate-[3deg] md:scale-[101%] 
+		origin-center select-none
+		bg-white 
+		
+		`)}
+  >
+    <span
+      class="ribbon-animation__slideshow group-hover:-scale-y-100 transition-all duration-200 tracking-widest block"
+    >
+      {keywordsString}
+    </span>
+  </p>
+</section>

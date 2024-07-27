@@ -1,0 +1,94 @@
+---
+import type { OpenGraphProps } from '@/types/open-graph';
+
+interface Props extends OpenGraphProps {}
+const {
+  siteName,
+  title,
+  description,
+  imageUrls,
+  imageSize = { width: 1200, height: 630 },
+  type = 'website',
+  profile,
+  book,
+  atricle,
+} = Astro.props;
+
+imageUrls.tg || (imageUrls.tg = imageUrls.fb);
+imageUrls.vk || (imageUrls.vk = imageUrls.fb);
+imageUrls.tw || (imageUrls.tw = imageUrls.fb);
+
+const canonicalUrl = Astro.site ? new URL(Astro.url.pathname, Astro.site) : '';
+---
+
+<>
+  <meta property="og:site_name" content={siteName} />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:url" content={canonicalUrl} />
+  <meta property="og:image" content={imageUrls.fb} />
+  <meta property="vk:image" content={imageUrls.vk} />
+  <meta name="twitter:image" content={imageUrls.tw} />
+  <meta name="fb:image" content={imageUrls.fb} />
+  <meta property="og:image:width" content={String(imageSize.width)} />
+  <meta property="og:image:height" content={String(imageSize.height)} />
+  <meta property="og:type" content={type} />
+  {
+    type === 'profile' && (
+      <>
+        <meta property="profile:first_name" content={profile?.first_name} />
+        <meta property="profile:last_name" content={profile?.last_name} />
+        <meta property="profile:username" content={profile?.username} />
+        <meta property="profile:gender" content={profile?.gender} />
+      </>
+    )
+  }
+  {
+    type === 'book' && (
+      <>
+        {book?.authors &&
+          book.authors.map((author: string) => (
+            <meta property="book:author" content={author} />
+          ))}
+        <meta property="book:isbn" content={book?.isbn} />
+        <meta
+          property="book:release_date"
+          content={book?.release_date.toISOString()}
+        />
+        {book?.tags &&
+          book.tags.map((tag: string) => (
+            <meta property="book:tag" content={tag} />
+          ))}
+      </>
+    )
+  }
+  {
+    type === 'article' && (
+      <>
+        {atricle?.authors &&
+          atricle.authors.map((author: string) => (
+            <meta property="article:author" content={author} />
+          ))}
+        <meta
+          property="article:published_time"
+          content={atricle?.published_time.toISOString()}
+        />
+        <meta
+          property="article:modified_time "
+          content={atricle?.modified_time.toISOString()}
+        />
+        <meta
+          property="article:expiration_time"
+          content={atricle?.expiration_time.toISOString()}
+        />
+        {atricle?.tags &&
+          atricle.tags.map((tag: string) => (
+            <meta property="article:tag" content={tag} />
+          ))}
+      </>
+    )
+  }
+  <!-- {type === 'video.movie' || type === 'video.tv_show' || type === 'video.other' || type ===  "video.episode" && (
+
+	)} -->
+</>

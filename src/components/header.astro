@@ -1,0 +1,37 @@
+---
+import Button from '@/components/ui/firm-button';
+import SiteLogo from '@/components/site-logo';
+import ContactButton from './contact-button.astro';
+
+const { pathname } = Astro.url;
+---
+
+<header class="sticky top-0 z-30 backdrop-blur">
+  <div
+    class="max-w-7xl mx-auto px-8 py-4 flex justify-between
+  items-center"
+  >
+    <div class="relative">
+      <a class="contents" href="/">
+        <SiteLogo />
+        <span class="absolute inset-0"></span>
+      </a>
+    </div>
+    {
+      pathname.includes('/admin') ? (
+        <form
+          action="/api/auth/logout"
+          method="post"
+          class="contents"
+        >
+          <Button>Выйти</Button>
+        </form>
+      ) : (
+        <ContactButton />
+      )
+    }
+  </div>
+  <hr
+    class="border-none h-px opacity-15 bg-gradient-to-r from-transparent via-white to-transparent"
+  />
+</header>

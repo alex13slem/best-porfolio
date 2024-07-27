@@ -1,0 +1,30 @@
+---
+export const prerender = false;
+
+import SEO from '@/components/seo.astro';
+import AdminLayout from '@/layouts/admin-layout.astro';
+import { createAstroServerClient } from '@/lib/supabase/createAstroServerClient';
+
+import { getMainInfo } from '@/lib/drizzle/queries/main-info';
+import MainInfoForm from '@/components/forms/main-info-form';
+
+const supabase = createAstroServerClient(Astro);
+const {
+  data: { user },
+} = await supabase.auth.getUser();
+if (!user) {
+  console.log('User is not logged in');
+  return Astro.redirect('/auth/login');
+}
+
+const mainInfoData = await getMainInfo();
+---
+
+<AdminLayout>
+  <SEO slot="seo" title="Админка" imageUrls={{ fb: '' }} />
+  <MainInfoForm
+    defaultValues={mainInfoData.at(0)}
+    method={mainInfoData.length ? 'edit' : 'create'}
+    client:only="react"
+  />
+</AdminLayout>

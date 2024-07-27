@@ -1,0 +1,33 @@
+---
+export const prerender = false;
+
+import Button from '@/components/ui/firm-button';
+import SEO from '@/components/seo.astro';
+import AdminLayout from '@/layouts/admin-layout.astro';
+import { createAstroServerClient } from '@/lib/supabase/createAstroServerClient';
+import { getUser } from '@/lib/utils';
+import DataTable from '@/components/tables/technologies/data-table';
+import { getTechnologies } from '@/lib/drizzle/queries/technologies';
+
+const supabase = createAstroServerClient(Astro);
+
+const user = await getUser(supabase);
+if (!user) {
+  console.log('User is not logged in');
+  return Astro.redirect('/auth/login');
+}
+
+const technologies = await getTechnologies();
+---
+
+<AdminLayout>
+  <SEO slot="seo" title="Технологии" description="!!!" imageUrls={{ fb: '' }} />
+  <div class="flex justify-between items-center">
+    <h1 class="text-4xl">Технологии</h1>
+    <Button variant={'fill'} className="relative">
+      <a href="/admin/technologies/create" class="absolute inset-0"></a>
+      Добавить технологию
+    </Button>
+  </div>
+  <DataTable data={technologies} className="mt-5" client:load />
+</AdminLayout>

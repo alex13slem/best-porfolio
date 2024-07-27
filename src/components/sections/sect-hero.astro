@@ -1,0 +1,42 @@
+---
+import linesPNG from '@/assets/img/Lines.png';
+import { Image } from 'astro:assets';
+import Textra from 'react-textra';
+import { parse } from 'marked';
+import ContactButton from '../contact-button.astro';
+import { getMainInfo } from '@/lib/drizzle/queries/main-info';
+
+const mainInfoData = (await getMainInfo()).at(0)!;
+const { heroEpithets, heroGreeting } = mainInfoData;
+---
+
+<section class="pb-28 pt-16 md:py-28">
+  <div
+    class="container relative z-1 max-w-4xl grid grid-cols-1 gap-8"
+  >
+    <Image
+      src={linesPNG}
+      alt="Lines"
+      class="-translate-y-[1px] w-full absolute top-0 pointer-events-none -z-10"
+    />
+    <h1
+      class="text-center text-5xl md:text-7xl font-bold mt-1 animated-colors__gradient bg-clip-text text-transparent select-none"
+    >
+      <Textra
+        data={heroEpithets}
+        effect={'downTop'}
+        client:only="react"
+        className=" bg-clip-text text-transparent bg-gradient-to-b from-white to-yellowgrey"
+      />
+      <br />
+      JavaScript разработчик
+    </h1>
+    <article
+      class="text-cyangrey text-lg text-center mx-auto max-w-xl"
+      set:html={parse(heroGreeting)}
+    />
+    <footer class="text-center flex justify-center">
+      <ContactButton variant="fill" />
+    </footer>
+  </div>
+</section>

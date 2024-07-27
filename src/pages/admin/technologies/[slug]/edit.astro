@@ -1,0 +1,47 @@
+---
+export const prerender = false;
+
+import SEO from '@/components/seo.astro';
+import AdminLayout from '@/layouts/admin-layout.astro';
+import phd from '@/assets/img/placeholder.png';
+import { createAstroServerClient } from '@/lib/supabase/createAstroServerClient';
+import { getUser } from '@/lib/utils';
+import TechnologiesForm from '@/components/forms/technologies-form';
+import { getTechnologyBySlug } from '@/lib/drizzle/queries/technologies';
+
+const supabase = createAstroServerClient(Astro);
+
+const user = await getUser(supabase);
+if (!user) {
+  console.log('User is not logged in');
+  return Astro.redirect('/auth/login');
+}
+
+const { slug } = Astro.params;
+if (!slug) {
+  return Astro.redirect('/404', 404);
+}
+
+const technology = await getTechnologyBySlug(slug);
+if (!technology) {
+  return Astro.redirect('/404', 404);
+}
+---
+
+<AdminLayout>
+  <SEO
+    slot="seo"
+    title={'Редактирование технологии'}
+    description=""
+    imageUrls={{ fb: '' }}
+  />
+  <div class="flex justify-between items-center">
+    <h1 class="text-4xl mb-5">Редактирование технологии</h1>
+  </div>
+  <TechnologiesForm
+    client:only="react"
+    imagePlaceholder={phd.src}
+    method={'edit'}
+    defaultValues={technology}
+  />
+</AdminLayout>

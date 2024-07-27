@@ -1,0 +1,22 @@
+---
+import RootLayout from '@/layouts/root-layout.astro';
+import SEO from '@/components/seo.astro';
+import Button from '../components/ui/firm-button';
+---
+
+<RootLayout class="overflow-clip">
+  <SEO
+    slot="seo"
+    title="JavaScript разработчик"
+    description="!!!"
+    imageUrls={{ fb: '' }}
+  />
+  <main class="flex flex-col justify-center items-center h-svh">
+    <h1 class="text-7xl">404</h1>
+    <p class="text-3xl">Страница не найдена</p>
+    <Button className="relative mt-5" variant={'fill'}>
+      <a href="/" class="absolute inset-0"></a>
+      Вернуться на главную
+    </Button>
+  </main>
+</RootLayout>

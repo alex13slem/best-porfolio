@@ -1,0 +1,43 @@
+---
+export const prerender = false;
+
+import SEO from '@/components/seo.astro';
+import SocialsForm from '@/components/forms/socials-form';
+import AdminLayout from '@/layouts/admin-layout.astro';
+import { createAstroServerClient } from '@/lib/supabase/createAstroServerClient';
+import { getUser } from '@/lib/utils';
+import { getSocialBySlug } from '@/lib/drizzle/queries/socials';
+import type { SocialsEnum } from '@/db/schema';
+
+const supabase = createAstroServerClient(Astro);
+
+const user = await getUser(supabase);
+
+if (!user) {
+  console.log('User is not logged in');
+  return Astro.redirect('/auth/login');
+}
+
+const slug = Astro.params.slug as SocialsEnum;
+
+const social = await getSocialBySlug(slug);
+if (!social) {
+  return Astro.redirect('/404', 404);
+}
+---
+
+<AdminLayout>
+  <SEO
+    slot="seo"
+    title={'Редактировать соц. сеть'}
+    imageUrls={{ fb: '' }}
+  />
+  <div class="flex justify-between items-center">
+    <h1 class="text-4xl mb-5">Редактировать соц. сеть</h1>
+  </div>
+  <SocialsForm
+    client:only="react"
+    method={'edit'}
+    defaultValues={social}
+  />
+</AdminLayout>

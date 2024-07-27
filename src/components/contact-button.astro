@@ -1,0 +1,20 @@
+---
+import Button from '@/components/ui/firm-button';
+import { getSocialBySlug } from '@/lib/drizzle/queries/socials';
+import type { VariantStyles } from './ui/firm-button/types';
+
+interface Props {
+  variant?: VariantStyles;
+  text?: string;
+}
+
+const { variant, text } = Astro.props;
+
+const telegram = await getSocialBySlug('telegram');
+const vk = await getSocialBySlug('vk');
+const hh = await getSocialBySlug('hh');
+---
+
+<Button href={telegram?.url || vk?.url || hh?.url} external {variant}>
+  {text || 'Напиши мне'}
+</Button>

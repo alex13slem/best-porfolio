@@ -1,0 +1,38 @@
+---
+export const prerender = false;
+
+import SEO from '@/components/seo.astro';
+import AdminLayout from '@/layouts/admin-layout.astro';
+import { createAstroServerClient } from '@/lib/supabase/createAstroServerClient';
+import ProjectForm from '@/components/forms/projects-form';
+import { getUser } from '@/lib/utils';
+import { getTechnologies } from '@/lib/drizzle/queries/technologies';
+
+const supabase = createAstroServerClient(Astro);
+
+const user = await getUser(supabase);
+
+if (!user) {
+  console.log('User is not logged in');
+  return Astro.redirect('/auth/login');
+}
+
+const technologies = await getTechnologies();
+---
+
+<AdminLayout>
+  <SEO
+    slot="seo"
+    title={'Новый проект'}
+    description=""
+    imageUrls={{ fb: '' }}
+  />
+  <div class="flex justify-between items-center">
+    <h1 class="text-4xl mb-5">Новый проект</h1>
+  </div>
+  <ProjectForm
+    client:only="react"
+    technologies={technologies}
+    method={'create'}
+  />
+</AdminLayout>

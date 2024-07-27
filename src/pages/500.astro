@@ -1,0 +1,29 @@
+---
+import RootLayout from '@/layouts/root-layout.astro';
+import SEO from '@/components/seo.astro';
+
+interface Props {
+  error: unknown;
+}
+
+const { error } = Astro.props;
+
+if (error instanceof Error) {
+  console.error(error);
+}
+---
+
+<RootLayout class="overflow-clip">
+  <SEO
+    slot="seo"
+    title="JavaScript разработчик"
+    description="!!!"
+    imageUrls={{ fb: '' }}
+  />
+  <main class="flex flex-col justify-center items-center h-svh">
+    <h1 class="text-5xl">{error instanceof Error ? error.cause : '500'}</h1>
+    <p>
+      {error instanceof Error ? error.message : 'Внутренняя ошибка сервера'}
+    </p>
+  </main>
+</RootLayout>

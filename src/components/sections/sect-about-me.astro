@@ -1,0 +1,79 @@
+---
+import classImg from '@/assets/img/stickers/class.png';
+import thinkAboutThisImg from '@/assets/img/stickers/ThkAbtIt.png';
+import { Image } from 'astro:assets';
+import { getMainInfo } from '@/lib/drizzle/queries/main-info';
+
+const mainInfoData = (await getMainInfo()).at(0)!;
+const { aboutHero } = mainInfoData;
+const textWords = aboutHero.split(' ');
+---
+
+<section id="about-me" class="pt-36 pb-28 md:py-36">
+  <div class="container relative">
+    <div class="absolute inset-0 -z-10">
+      <Image
+        src={thinkAboutThisImg}
+        alt="Think About This"
+        width={210}
+        class={`absolute left-0 lg:left-10 top-0 -translate-y-full md:-translate-y-3/4 lg:translate-y-0 w-[9rem] md:w-[11rem] lg:w-auto pointer-events-none`}
+      />
+      <Image
+        src={classImg}
+        alt="Class"
+        width={210}
+        class={`absolute bottom-0 right-0 lg:right-10 translate-y-full lg:translate-y-0 md:translate-y-3/4 w-[9rem] md:w-[11rem] lg:w-auto pointer-events-none`}
+      />
+    </div>
+    <h2
+      class="text-center bg-clip-text text-transparent text-sm font-extrabold white_gradient uppercase mb-4"
+    >
+      Обо мне
+    </h2>
+    <p
+      class="font-semibold text-3xl md:text-5xl lg:text-7xl text-center w-full mx-auto max-w-5xl leading-tight lg:leading-tight flex flex-wrap gap-3 justify-center"
+    >
+      {
+        textWords.map((word, index) => (
+          <span
+            class={`word bg-clip-text text-transparent white_gradient opacity-40 transition-all duration-500 data-[visible=true]:opacity-100 delay-[${index * 100}ms]`}
+          >
+            {word}
+          </span>
+        ))
+      }
+    </p>
+  </div>
+</section>
+
+<script>
+  const words = document.querySelectorAll('#about-me .word');
+
+  words.forEach((word) => {
+    const callback: IntersectionObserverCallback = (
+      entries,
+      _observer
+    ) => {
+      entries.forEach((entry) => {
+        const element = entry.target as HTMLSpanElement;
+        if (entry.isIntersecting) {
+          element.dataset.visible = 'true';
+        } else {
+          element.dataset.visible = 'false';
+        }
+      });
+    };
+
+    const options: IntersectionObserverInit = {
+      root: null, // если null, будет использована область просмотра
+      rootMargin: '0px', // маржа вокруг root
+      threshold: 0.5, // процент видимости, при котором callback вызывается
+    };
+
+    // Создаем наблюдателя
+    const observer = new IntersectionObserver(callback, options);
+
+    // Начинаем наблюдать за целевым элементом
+    observer.observe(word);
+  });
+</script>

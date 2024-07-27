@@ -1,0 +1,78 @@
+---
+import { Image } from 'astro:assets';
+import linesPNG from '@/assets/img/Lines.png';
+import { cn } from '@/lib/utils';
+import { getSocials } from '@/lib/drizzle/queries/socials';
+import Button from '../ui/firm-button';
+import type { SocialsEnum } from '@/db/schema';
+
+const socials = await getSocials();
+
+const getButtonText = (slug: SocialsEnum) => {
+  switch (slug) {
+    case 'telegram':
+      return 'Связаться в Telegram';
+    case 'github':
+      return 'Посети мой GitHub';
+    case 'vk':
+      return 'Связаться в VK';
+    case 'discord':
+      return 'Связаться в Discord';
+    case 'hh':
+      return 'Посмотри мою вакансию';
+  }
+};
+---
+
+<section class="pt-36 pb-44 md:py-36">
+  <div
+    class={cn(`
+		container max-w-5xl relative md:overflow-visible`)}
+  >
+    <div class="absolute inset-0 -z-10">
+      <Image
+        src={linesPNG}
+        alt="Lines"
+        class="-translate-y-[1px] w-full h-[70vh] lg:h-auto absolute bottom-0 pointer-events-none -z-10"
+      />
+      <div
+        class={cn(`
+			w-full h-[60vh] 
+			rounded-full 
+			absolute bottom-0 md:top-0 translate-y-1/3  md:-translate-y-2/3
+			gradient-experience__1 blur-3xl md:blur-[150px] opacity-100 z-10
+			`)}
+      >
+      </div>
+    </div>
+    <h2
+      class={cn(`
+		text-center bg-clip-text text-transparent text-sm font-extrabold white_gradient uppercase mb-4`)}
+    >
+      Мои контакты
+    </h2>
+    <p
+      class={cn(`
+		font-bold text-5xl bg-clip-text white_gradient text-transparent leading-snug text-center
+		`)}
+    >
+      Готовы начать интересный проект?
+    </p>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-14 md:mt-20">
+      {
+        socials.map((social) => (
+          <article class="text-center flex flex-col items-center gap-3">
+            <iconify-icon
+              icon={social.iconifyId}
+              class="text-7xl text-white text-opacity-90"
+              title={social.name}
+            />
+            <Button variant="fill" href={social.url} external>
+              {getButtonText(social.slug)}
+            </Button>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>

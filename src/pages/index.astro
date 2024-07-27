@@ -1,20 +1,27 @@
 ---
-import RootLayout from '$layouts/RootLayout.astro';
-import SEO from '$components/SEO.astro';
-import Header from '$components/Header/index.astro';
-import SectHero from '../sections/SectHero.astro';
-import SectPortfolioCards from '../sections/SectPortfolioCards.astro';
+import RootLayout from '@/layouts/root-layout.astro';
+import SEO from '@/components/seo.astro';
+import SectHero from '@/components/sections/sect-hero.astro';
+import SectPortfolioCards from '@/components/sections/sect-portfolio-cards.astro';
+import { getMainInfo } from '@/lib/drizzle/queries/main-info';
+import SectAboutMe from '@/components/sections/sect-about-me.astro';
+import SectRibbon from '../components/sections/sect-ribbon.astro';
+import SectContacts from '../components/sections/sect-contacts.astro';
+
+const mainInfoData = (await getMainInfo()).at(0)!;
 ---
 
 <RootLayout>
   <SEO
     slot="seo"
     title="JavaScript разработчик"
-    description="!!!"
-    imageUrls={{ fb: '' }}
+    imageUrls={{ fb: mainInfoData.openGraphImage }}
   />
   <main>
     <SectHero />
     <SectPortfolioCards />
+    <SectAboutMe />
+    <SectRibbon />
+    <SectContacts />
   </main>
 </RootLayout>

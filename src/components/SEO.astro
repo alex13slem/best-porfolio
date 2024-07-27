@@ -1,20 +1,25 @@
 ---
-import type { OpenGraphProps } from '$types/open-graph';
-import OpenGraph from './OpenGraph.astro';
+import type { OpenGraphProps } from '@/types/open-graph';
+import OpenGraph from './open-graph.astro';
+import { getMainInfo } from '../lib/drizzle/queries/main-info';
 
 interface Props extends Omit<OpenGraphProps, 'siteName'> {
   keywords?: string;
 }
 
-const { keywords, description, title, ...props } = Astro.props;
+const { keywords, description: _description, title, ...props } = Astro.props;
 
-const siteName = import.meta.env.SITE_NAME_TAB;
+const siteNameEnv = import.meta.env.SITE_NAME_TAB;
+const mainInfoData = (await getMainInfo()).at(0);
+
+const siteName = siteNameEnv || mainInfoData?.siteName || '';
+const description = _description || mainInfoData?.siteDescription || '';
 ---
 
 <>
   {keywords && <meta name="keywords" content={keywords} />}
   <meta name="description" content={description} />
-  <OpenGraph {description} {siteName} {title} {...props} />
+  <OpenGraph {description} {title} {siteName} {...props} />
 
   <title>{siteName} | {title}</title>
 </>

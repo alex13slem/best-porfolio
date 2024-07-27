@@ -1,0 +1,26 @@
+---
+import type { GetStaticPaths } from 'astro';
+import { getTechnologies } from '@/lib/drizzle/queries/technologies';
+import RootLayout from '@/layouts/root-layout.astro';
+import SEO from '@/components/seo.astro';
+
+export const getStaticPaths = (async () => {
+  const paths = (await getTechnologies()).map((technology) => ({
+    params: { slug: technology.slug },
+    props: { technology },
+  }));
+  return paths;
+}) satisfies GetStaticPaths;
+
+const { technology } = Astro.props;
+---
+
+<RootLayout>
+  <SEO
+    slot="seo"
+    title={technology.name}
+    description={technology.description}
+    imageUrls={{ fb: technology.image }}
+  />
+  <main></main>
+</RootLayout>

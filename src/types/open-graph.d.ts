@@ -1,7 +1,7 @@
 export interface OpenGraphProps {
   siteName: string;
   title: string;
-  description: string;
+  description?: string;
   imageUrls: {
     fb: string;
     tg?: string;

@@ -1,0 +1,57 @@
+---
+import { cn } from '../lib/utils';
+import RootLayout from './root-layout.astro';
+
+const links = [
+  {
+    href: '/admin',
+    title: 'Главная',
+  },
+  {
+    href: '/admin/socials',
+    title: 'Соц. сети',
+  },
+  {
+    href: '/admin/projects',
+    title: 'Проекты',
+  },
+  {
+    href: '/admin/technologies',
+    title: 'Технологии',
+  },
+];
+const { pathname } = Astro.url;
+---
+
+<slot name="seo" />
+<RootLayout
+  class={`grid
+        overflow-clip
+        grid-rows-[auto,1fr] h-svh`}
+>
+  <div class="flex container mx-auto gap-4 overflow-auto">
+    <aside class="w-64 flex-shrink-0 flex sticky top-0">
+      <nav class="flex flex-col flex-1">
+        {
+          links.map((link) => (
+            <a
+              href={link.href}
+              class={cn(
+                'py-2 px-4 text-xl hover:bg-yellow hover:bg-opacity-5 border-opacity-10 transition-colors',
+                pathname === link.href && 'bg-yellow bg-opacity-5'
+              )}
+            >
+              {link.title}
+            </a>
+          ))
+        }
+      </nav>
+      <hr
+        class="border-none w-px h-full opacity-15 bg-gradient-to-b from-white to-transparent"
+      />
+    </aside>
+    <main class="flex-1 py-5 h-fit">
+      <slot />
+    </main>
+  </div>
+</RootLayout>

@@ -1,0 +1,35 @@
+---
+export const prerender = false;
+
+import SEO from '@/components/seo.astro';
+import AdminLayout from '@/layouts/admin-layout.astro';
+import phd from '@/assets/img/placeholder.png';
+import { createAstroServerClient } from '@/lib/supabase/createAstroServerClient';
+import { getUser } from '@/lib/utils';
+import TechnologiesForm from '@/components/forms/technologies-form';
+
+const supabase = createAstroServerClient(Astro);
+
+const user = await getUser(supabase);
+if (!user) {
+  console.log('User is not logged in');
+  return Astro.redirect('/auth/login');
+}
+---
+
+<AdminLayout>
+  <SEO
+    slot="seo"
+    title={'Новый проект'}
+    description=""
+    imageUrls={{ fb: '' }}
+  />
+  <div class="flex justify-between items-center">
+    <h1 class="text-4xl mb-5">Добавление технологии</h1>
+  </div>
+  <TechnologiesForm
+    client:only="react"
+    imagePlaceholder={phd.src}
+    method={'create'}
+  />
+</AdminLayout>

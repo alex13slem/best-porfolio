@@ -94,7 +94,7 @@ const ProjectCard: FC<Props> = ({ className, project, ...props }) => {
           <hr className="border-white opacity-10 my-6" />
 
           <div className="flex items-center justify-between gap-3 relative z-20 flex-col lg:flex-row">
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-3 flex-wrap">
               {technologies.map((t) => (
                 <a
                   key={t.id}

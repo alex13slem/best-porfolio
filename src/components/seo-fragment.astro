@@ -5,21 +5,29 @@ import { getMainInfo } from '../lib/drizzle/queries/main-info';
 
 interface Props extends Omit<OpenGraphProps, 'siteName'> {
   keywords?: string;
+  noindex?: boolean;
 }
 
-const { keywords, description: _description, title, ...props } = Astro.props;
+const {
+  keywords,
+  description: _description,
+  title,
+  noindex = false,
+  ...props
+} = Astro.props;
 
 const siteNameEnv = import.meta.env.SITE_NAME_TAB;
 const mainInfoData = (await getMainInfo()).at(0);
 
 const siteName = siteNameEnv || mainInfoData?.siteName || '';
-const description = _description || mainInfoData?.siteDescription || '';
+const description =
+  _description || mainInfoData?.siteDescription || '';
 ---
 
 <>
   {keywords && <meta name="keywords" content={keywords} />}
   <meta name="description" content={description} />
   <OpenGraph {description} {title} {siteName} {...props} />
-
+  {noindex && <meta name="robots" content="noindex" />}
   <title>{siteName} | {title}</title>
 </>

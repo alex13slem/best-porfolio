@@ -2,12 +2,12 @@
 export const prerender = false;
 
 import Button from '@/components/ui/firm-button';
-import SEO from '../../../components/seo.astro';
 import AdminLayout from '@/layouts/admin-layout.astro';
 import { createAstroServerClient } from '@/lib/supabase/createAstroServerClient';
 import DataTable from '@/components/tables/projects/data-table';
 import { getUser } from '@/lib/utils';
 import { getProjects } from '@/lib/drizzle/queries/projects';
+import SeoFragment from '@/components/seo-fragment.astro';
 
 const supabase = createAstroServerClient(Astro);
 
@@ -21,11 +21,11 @@ const projects = await getProjects();
 ---
 
 <AdminLayout>
-  <SEO
+  <SeoFragment
     slot="seo"
     title="Проекты"
-    description="!!!"
     imageUrls={{ fb: '' }}
+    noindex
   />
   <div class="flex justify-between items-center">
     <h1 class="text-4xl">Проекты</h1>

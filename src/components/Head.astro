@@ -1,12 +1,11 @@
 ---
-import type { HTMLAttributes } from "astro/types";
+import type { HTMLAttributes } from 'astro/types';
 
-export interface HeadProps extends HTMLAttributes<"head"> {
+interface Props extends HTMLAttributes<'head'> {
   favicon?: string;
-  noindex?: false;
 }
 
-const { favicon, noindex, ...props }: HeadProps = Astro.props;
+const { favicon, ...props } = Astro.props;
 ---
 
 <head {...props}>
@@ -14,6 +13,6 @@ const { favicon, noindex, ...props }: HeadProps = Astro.props;
   <meta name="viewport" content="width=device-width" />
   <link rel="icon" type="image/svg+xml" href={favicon} />
   <meta name="generator" content={Astro.generator} />
-  {noindex && <meta name="robots" content="noindex" />}
+
   <slot />
 </head>

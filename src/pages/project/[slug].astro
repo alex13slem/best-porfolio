@@ -2,9 +2,9 @@
 import type { GetStaticPaths } from 'astro';
 import { getProjectsWithTechnologies } from '@/lib/drizzle/queries/projects';
 import RootLayout from '@/layouts/root-layout.astro';
-import SEO from '../../components/seo.astro';
 import { addProtocolToUrl } from '@/lib/utils';
 import { parse } from 'marked';
+import SeoFragment from '@/components/seo-fragment.astro';
 
 export const getStaticPaths = (async () => {
   const paths = (await getProjectsWithTechnologies()).map(
@@ -33,7 +33,7 @@ const formattedGithubLink = addProtocolToUrl(githubLink);
 ---
 
 <RootLayout>
-  <SEO
+  <SeoFragment
     slot="seo"
     title={name}
     {description}

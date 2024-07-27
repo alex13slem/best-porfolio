@@ -1,13 +1,13 @@
 ---
 export const prerender = false;
 
-import SEO from '../../../../components/seo.astro';
 import AdminLayout from '@/layouts/admin-layout.astro';
 import { createAstroServerClient } from '@/lib/supabase/createAstroServerClient';
 import ProjectForm from '@/components/forms/projects-form';
 import { getUser } from '@/lib/utils';
 import { getProjectBySlug } from '@/lib/drizzle/queries/projects';
 import { getTechnologies } from '@/lib/drizzle/queries/technologies';
+import SeoFragment from '@/components/seo-fragment.astro';
 
 const supabase = createAstroServerClient(Astro);
 
@@ -28,11 +28,11 @@ const technologies = await getTechnologies();
 ---
 
 <AdminLayout>
-  <SEO
+  <SeoFragment
     slot="seo"
     title={'Редактирование проекта'}
-    description=""
     imageUrls={{ fb: '' }}
+    noindex
   />
   <div class="flex justify-between items-center">
     <h1 class="text-4xl mb-5">Редактирование проекта</h1>

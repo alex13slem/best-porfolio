@@ -1,12 +1,12 @@
 ---
 export const prerender = false;
 
-import SEO from '../../components/seo.astro';
 import AdminLayout from '@/layouts/admin-layout.astro';
 import { createAstroServerClient } from '@/lib/supabase/createAstroServerClient';
 
 import { getMainInfo } from '@/lib/drizzle/queries/main-info';
 import MainInfoForm from '@/components/forms/main-info-form';
+import SeoFragment from '@/components/seo-fragment.astro';
 
 const supabase = createAstroServerClient(Astro);
 const {
@@ -21,7 +21,12 @@ const mainInfoData = await getMainInfo();
 ---
 
 <AdminLayout>
-  <SEO slot="seo" title="Админка" imageUrls={{ fb: '' }} />
+  <SeoFragment
+    slot="seo"
+    title="Админка"
+    imageUrls={{ fb: '' }}
+    noindex
+  />
   <MainInfoForm
     defaultValues={mainInfoData.at(0)}
     method={mainInfoData.length ? 'edit' : 'create'}

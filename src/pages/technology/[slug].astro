@@ -2,7 +2,7 @@
 import type { GetStaticPaths } from 'astro';
 import { getTechnologies } from '@/lib/drizzle/queries/technologies';
 import RootLayout from '@/layouts/root-layout.astro';
-import SEO from '../../components/seo.astro';
+import SeoFragment from '@/components/seo-fragment.astro';
 
 export const getStaticPaths = (async () => {
   const paths = (await getTechnologies()).map((technology) => ({
@@ -16,7 +16,7 @@ const { technology } = Astro.props;
 ---
 
 <RootLayout>
-  <SEO
+  <SeoFragment
     slot="seo"
     title={technology.name}
     description={technology.description}

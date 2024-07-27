@@ -1,16 +1,14 @@
 ---
 import { ViewTransitions } from 'astro:transitions';
 import type { HTMLAttributes } from 'astro/types';
-import Head, { type HeadProps } from '@/components/head.astro';
 import Header from '@/components/header.astro';
 import Footer from '@/components/footer.astro';
-// import '$assets/fonts/satoshi-font.css';
 import '@/styles/app.css';
 import { cn } from '../lib/utils';
+import Head from '../components/head.astro';
 
 export interface HtmlProps
-  extends Omit<HTMLAttributes<'html'>, 'title'>,
-    HeadProps {
+  extends Omit<HTMLAttributes<'html'>, 'title'> {
   favicon?: string;
   hasHeader?: boolean;
   hasFooter?: boolean;
@@ -21,7 +19,6 @@ const {
   hasHeader = true,
   hasFooter = true,
   favicon = '/favicon.svg',
-  noindex,
   ...props
 }: HtmlProps = Astro.props;
 ---
@@ -36,11 +33,15 @@ const {
   transition:animate="initial"
   {...props}
 >
-  <Head {favicon} {noindex}>
+  <Head {favicon}>
     <slot name="seo" />
     <meta name="referrer" content="origin" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin
+    />
     <link
       href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap"
       rel="stylesheet"
@@ -59,7 +60,9 @@ const {
       className
     )}
   >
-    <div class="fixed inset-0 -z-10 pointer-events-none opacity-90 bg-noise">
+    <div
+      class="fixed inset-0 -z-10 pointer-events-none opacity-90 bg-noise"
+    >
     </div>
     {hasHeader && <Header />}
     <slot />

@@ -1,11 +1,11 @@
 ---
 export const prerender = false;
 
-import SEO from '../../components/seo.astro';
 import { createAstroServerClient } from '@/lib/supabase/createAstroServerClient';
-import RootLayout from '../../layouts/root-layout.astro';
+import RootLayout from '@/layouts/root-layout.astro';
 import AuthForm from '@/components/forms/auth-form';
-import { getUser } from '../../lib/utils';
+import { getUser } from '@/lib/utils';
+import SeoFragment from '@/components/seo-fragment.astro';
 
 const supabase = createAstroServerClient(Astro);
 
@@ -16,7 +16,7 @@ if (user) {
 ---
 
 <RootLayout>
-  <SEO
+  <SeoFragment
     slot="seo"
     title="Админка"
     description=""

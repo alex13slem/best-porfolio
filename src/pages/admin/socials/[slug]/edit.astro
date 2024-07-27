@@ -1,13 +1,13 @@
 ---
 export const prerender = false;
 
-import SEO from '../../../../components/seo.astro';
 import SocialsForm from '@/components/forms/socials-form';
 import AdminLayout from '@/layouts/admin-layout.astro';
 import { createAstroServerClient } from '@/lib/supabase/createAstroServerClient';
 import { getUser } from '@/lib/utils';
 import { getSocialBySlug } from '@/lib/drizzle/queries/socials';
 import type { SocialsEnum } from '@/db/schema';
+import SeoFragment from '@/components/seo-fragment.astro';
 
 const supabase = createAstroServerClient(Astro);
 
@@ -27,10 +27,11 @@ if (!social) {
 ---
 
 <AdminLayout>
-  <SEO
+  <SeoFragment
     slot="seo"
     title={'Редактировать соц. сеть'}
     imageUrls={{ fb: '' }}
+    noindex
   />
   <div class="flex justify-between items-center">
     <h1 class="text-4xl mb-5">Редактировать соц. сеть</h1>

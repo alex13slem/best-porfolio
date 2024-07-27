@@ -5,9 +5,9 @@ import { createAstroServerClient } from '@/lib/supabase/createAstroServerClient'
 import { getUser } from '@/lib/utils';
 import Button from '@/components/ui/firm-button';
 import AdminLayout from '@/layouts/admin-layout.astro';
-import SEO from '../../../components/seo.astro';
 import { getSocials } from '@/lib/drizzle/queries/socials';
 import DataTable from '@/components/tables/socials/data-table';
+import SeoFragment from '@/components/seo-fragment.astro';
 
 const supabase = createAstroServerClient(Astro);
 
@@ -21,7 +21,12 @@ const socials = await getSocials();
 ---
 
 <AdminLayout>
-  <SEO slot="seo" title="Соц. сети" imageUrls={{ fb: '' }} />
+  <SeoFragment
+    slot="seo"
+    title="Соц. сети"
+    imageUrls={{ fb: '' }}
+    noindex
+  />
   <div class="flex justify-between items-center">
     <h1 class="text-4xl">Соц. сети</h1>
     <Button variant={'fill'} className="relative">

@@ -14,5 +14,7 @@ export default defineConfig({
   ],
   site: 'http://localhost:4321/',
   output: 'hybrid',
-  adapter: netlify(),
+  adapter: netlify({
+    edgeMiddleware: true,
+  }),
 });

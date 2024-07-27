@@ -9,12 +9,16 @@ import { cn } from '@/lib/utils';
 import { login } from '@/lib/services/auth/login';
 import { authSchema } from '@/schemas/api/auth';
 import { navigate } from 'astro:transitions/client';
+import { useToast } from '../ui/use-toast';
 
-interface Props extends ComponentProps<FC>, HTMLAttributes<HTMLDivElement> {
+interface Props
+  extends ComponentProps<FC>,
+    HTMLAttributes<HTMLDivElement> {
   type: 'login' | 'register';
 }
 
 const AuthForm: FC<Props> = ({ type, className, ...props }) => {
+  const { toast } = useToast();
   const form = useForm<z.infer<typeof authSchema>>({
     resolver: zodResolver(authSchema),
   });
@@ -32,6 +36,10 @@ const AuthForm: FC<Props> = ({ type, className, ...props }) => {
         navigate('/admin');
       } else {
         console.error('Login failed');
+        toast({
+          variant: 'destructive',
+          title: 'Не удалось войти',
+        });
       }
     }
     if (type === 'register') {
@@ -52,7 +60,10 @@ const AuthForm: FC<Props> = ({ type, className, ...props }) => {
     >
       <h1 className="text-2xl text-center mb-5">{title}</h1>
       <Form {...form}>
-        <form className="grid gap-4" onSubmit={handleSubmit(onSubmit)}>
+        <form
+          className="grid gap-4"
+          onSubmit={handleSubmit(onSubmit)}
+        >
           <InputField
             control={control}
             name="email"

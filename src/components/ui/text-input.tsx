@@ -2,11 +2,13 @@ import {
   forwardRef,
   type ComponentProps,
   type FC,
-  type HTMLAttributes,
+  type InputHTMLAttributes,
 } from 'react';
 import { twMerge } from 'tailwind-merge';
 
-interface Props extends ComponentProps<FC>, HTMLAttributes<HTMLInputElement> {}
+interface Props
+  extends ComponentProps<FC>,
+    InputHTMLAttributes<HTMLInputElement> {}
 
 const TextInput: FC<Props> = forwardRef<HTMLInputElement, Props>(
   ({ className, ...props }, ref) => {

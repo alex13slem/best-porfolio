@@ -1,7 +1,7 @@
 import {
   type ComponentProps,
   type FC,
-  type HTMLAttributes,
+  type FormHTMLAttributes,
 } from 'react';
 import { Form } from '../ui/form';
 import {
@@ -25,10 +25,11 @@ import FormTitle from '../react-hook-form/form-title';
 import { cn } from '@/lib/utils';
 import { mainInfoService } from '@/lib/services/mainInfoService';
 import type { SelectMainInfo } from '@/db/schema';
+import { useToast } from '../ui/use-toast';
 
 interface Props
   extends ComponentProps<FC>,
-    HTMLAttributes<HTMLFormElement> {
+    FormHTMLAttributes<HTMLFormElement> {
   method: 'create' | 'edit';
   defaultValues?: SelectMainInfo;
 }
@@ -39,6 +40,7 @@ const MainInfoForm: FC<Props> = ({
   className,
   ...props
 }) => {
+  const { toast } = useToast();
   const form = useForm<InsertFormMainInfo>({
     resolver: zodResolver(
       method === 'create'
@@ -75,6 +77,10 @@ const MainInfoForm: FC<Props> = ({
         } project:`,
         result.errors
       );
+      toast({
+        variant: 'destructive',
+        title: 'Не удалось сохранить',
+      });
     }
   };
   return (

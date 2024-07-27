@@ -2,7 +2,7 @@ import {
   useEffect,
   type ComponentProps,
   type FC,
-  type HTMLAttributes,
+  type FormHTMLAttributes,
 } from 'react';
 import { useForm, type SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -22,10 +22,11 @@ import type { FieldError } from 'react-hook-form';
 import DataFormButtons from '../ui/data-form-buttons';
 import { getSlugifyValue } from '@/lib/utils';
 import type { SelectTechnology } from '@/db/schema';
+import { useToast } from '../ui/use-toast';
 
 interface Props
   extends ComponentProps<FC>,
-    HTMLAttributes<HTMLFormElement> {
+    FormHTMLAttributes<HTMLFormElement> {
   imagePlaceholder?: string;
   method: 'create' | 'edit';
   defaultValues?: SelectTechnology;
@@ -38,6 +39,7 @@ const TechnologiesForm: FC<Props> = ({
   defaultValues,
   ...props
 }) => {
+  const { toast } = useToast();
   const form = useForm<InsertFormTechnology>({
     resolver: zodResolver(
       method === 'create'
@@ -75,12 +77,16 @@ const TechnologiesForm: FC<Props> = ({
           );
 
     if (!result.success) {
-      return console.error(
+      console.error(
         `Error ${
           method === 'create' ? 'creating' : 'updating'
         } technology:`,
         result.errors
       );
+      return toast({
+        variant: 'destructive',
+        title: 'Не удалось сохранить',
+      });
     }
     navigate('/admin/technologies');
   };

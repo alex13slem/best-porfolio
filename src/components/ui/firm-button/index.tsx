@@ -1,9 +1,11 @@
-import type { ComponentProps, FC, HTMLAttributes } from 'react';
+import type { ButtonHTMLAttributes, ComponentProps, FC } from 'react';
 import type { VariantStyles } from './types';
 import { variantsCss } from './styles';
 import { cn } from '@/lib/utils';
 
-interface Props extends ComponentProps<FC>, HTMLAttributes<HTMLButtonElement> {
+interface Props
+  extends ButtonHTMLAttributes<HTMLButtonElement>,
+    ComponentProps<FC> {
   variant?: VariantStyles;
   href?: string;
   external?: boolean;
@@ -14,16 +16,21 @@ const Button: FC<Props> = ({
   href,
   external,
   children,
+  disabled,
   variant = 'bordered',
+  ...props
 }) => {
   return (
     <button
       className={cn(
         variantsCss.root[variant],
-
-        `relative cursor-pointer rounded-full font-medium text-base group z-0`,
+        `relative  rounded-full 
+        font-medium text-base group z-0`,
+        disabled ? 'filter grayscale' : 'cursor-pointer',
         className
       )}
+      disabled={disabled}
+      {...props}
     >
       {href && (
         <a
@@ -40,7 +47,7 @@ const Button: FC<Props> = ({
       >
         {children}
       </span>
-      <i className={cn(variantsCss.i[variant])} />
+      {!disabled && <i className={cn(variantsCss.i[variant])} />}
     </button>
   );
 };

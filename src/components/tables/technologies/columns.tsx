@@ -9,6 +9,7 @@ import TableDropdownMenu from '@/components/react-table/table-dropdown-menu';
 import TableDeleteAlert from '@/components/react-table/table-delete-alert';
 import type { SelectTechnology } from '@/db/schema';
 import { technologiesService } from '@/lib/services/technologiesService';
+import { useToast } from '../../ui/use-toast';
 
 export const columns: ColumnDef<SelectTechnology>[] = [
   {
@@ -40,6 +41,7 @@ export const columns: ColumnDef<SelectTechnology>[] = [
     // Actions
     id: 'actions',
     cell: ({ row }) => {
+      const { toast } = useToast();
       const [deleteDialogIsOpen, setDeleteDialogIsOpen] =
         useState<boolean>(false);
 
@@ -53,6 +55,10 @@ export const columns: ColumnDef<SelectTechnology>[] = [
           }
         } catch (error) {
           console.error('Error deleting technology:', error);
+          toast({
+            variant: 'destructive',
+            title: 'Не удалось удалить',
+          });
         }
       };
 

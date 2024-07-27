@@ -7,6 +7,7 @@ import { navigate } from 'astro:transitions/client';
 import createDropDownActions from '@/lib/react-table/createDropDownAction';
 import TableDeleteAlert from '../../react-table/table-delete-alert';
 import TableDropdownMenu from '../../react-table/table-dropdown-menu';
+import { useToast } from '../../ui/use-toast';
 
 export const columns: ColumnDef<SelectSocial>[] = [
   // Icon
@@ -52,6 +53,7 @@ export const columns: ColumnDef<SelectSocial>[] = [
   {
     id: 'actions',
     cell: ({ row }) => {
+      const { toast } = useToast();
       const [deleteDialogIsOpen, setDeleteDialogIsOpen] =
         useState<boolean>(false);
 
@@ -65,6 +67,10 @@ export const columns: ColumnDef<SelectSocial>[] = [
           }
         } catch (error) {
           console.error('Error deleting social:', error);
+          toast({
+            variant: 'destructive',
+            title: 'Не удалось удалить',
+          });
         }
       };
 

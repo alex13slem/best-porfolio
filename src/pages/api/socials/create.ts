@@ -44,7 +44,6 @@ export const POST: APIRoute = async (ctx) => {
     const errMessage =
       error instanceof Error ? error.message : 'Unknown error';
     console.error('Error create socials:', errMessage);
-    console.log(new ResponseErrorData([errMessage]));
 
     return json(new ResponseErrorData([errMessage]), {
       status: 500,

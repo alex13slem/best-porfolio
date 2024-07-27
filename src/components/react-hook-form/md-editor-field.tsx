@@ -1,11 +1,21 @@
 import MDEditor from '@uiw/react-md-editor';
-import type { HTMLAttributes } from 'react';
-import type { FieldValues, Control, FieldError, Path } from 'react-hook-form';
-import { FormField, FormItem, FormLabel, FormControl } from '../ui/form';
+import type { TextareaHTMLAttributes } from 'react';
+import type {
+  FieldValues,
+  Control,
+  FieldError,
+  Path,
+} from 'react-hook-form';
+import {
+  FormField,
+  FormItem,
+  FormLabel,
+  FormControl,
+} from '../ui/form';
 import FormTitle from './form-title';
 
 interface Props<T extends FieldValues>
-  extends HTMLAttributes<HTMLTextAreaElement> {
+  extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   control: Control<T>;
   name: Path<T>;
   label: string;

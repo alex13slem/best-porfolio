@@ -1,7 +1,7 @@
 import {
   type ComponentProps,
   type FC,
-  type HTMLAttributes,
+  type FormHTMLAttributes,
 } from 'react';
 import { socialsEnum, type SelectSocial } from '@/db/schema/socials';
 import {
@@ -26,10 +26,11 @@ import {
   type SelectOption,
 } from '../react-hook-form/select-field';
 import DataFormButtons from '../ui/data-form-buttons';
+import { useToast } from '../ui/use-toast';
 
 interface Props
   extends ComponentProps<FC>,
-    HTMLAttributes<HTMLFormElement> {
+    FormHTMLAttributes<HTMLFormElement> {
   method: 'create' | 'edit';
   defaultValues?: SelectSocial;
 }
@@ -40,6 +41,7 @@ const SocialsForm: FC<Props> = ({
   className,
   ...props
 }) => {
+  const { toast } = useToast();
   const form = useForm<InsertFormSocial>({
     resolver: zodResolver(
       method === 'create'
@@ -71,15 +73,16 @@ const SocialsForm: FC<Props> = ({
             defaultValues!
           );
     if (!result.success) {
-      // console.log(result);
-
       console.error(
         `Error ${
           method === 'create' ? 'creating' : 'updating'
         } socials:`,
         result.errors
       );
-      return;
+      return toast({
+        variant: 'destructive',
+        title: 'Не удалось сохранить',
+      });
     }
     navigate('/admin/socials');
   };

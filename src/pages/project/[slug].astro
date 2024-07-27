@@ -2,7 +2,7 @@
 import type { GetStaticPaths } from 'astro';
 import { getProjectsWithTechnologies } from '@/lib/drizzle/queries/projects';
 import RootLayout from '@/layouts/root-layout.astro';
-import { addProtocolToUrl } from '@/lib/utils';
+import { addProtocolToUrl, cn } from '@/lib/utils';
 import { parse } from 'marked';
 import SeoFragment from '@/components/seo-fragment.astro';
 
@@ -39,24 +39,28 @@ const formattedGithubLink = addProtocolToUrl(githubLink);
     {description}
     imageUrls={{ fb: thumbnailGreeting }}
   />
-  <div class="container py-5 grid grid-cols-12 grid-flow-dense gap-4">
-    <main
-      class="grid grid-cols-subgrid grid-rows-subgrid col-span-8 row-span-3"
-    >
+  <div class="container py-5">
+    <main class="grid grid-cols-12 grid-flow-dense gap-4">
       <!-- Thumbnail -->
       <section
-        class="col-span-8 row-span-2 p-[2px] overflow-clip z-10
+        class={cn(`
+          col-span-full 
+          lg:col-span-8 lg:row-span-2 
+          p-[2px] overflow-clip z-10
 					rounded-xl animate-gradient__rotate
-					relative group"
+					relative group aspect-video lg:aspect-auto
+        `)}
       >
         <a
           href={formattedSiteLink}
           target="_blank"
-          class="block
+          class={cn(`
+            block
           bg-white bg-opacity-10 backdrop-blur-sm
 						rounded-[10px] border border-white border-opacity-10
 						overflow-clip
-						z-10 h-full"
+						z-10 h-full
+          `)}
         >
           <img
             src={thumbnailGreeting}
@@ -71,31 +75,32 @@ const formattedGithubLink = addProtocolToUrl(githubLink);
 
       <!-- Body -->
       <section
-        class="col-span-8 row-span-3 p-4
-					rounded-xl
+        class={cn(`
+          col-span-full 
+          lg:col-span-8 lg:row-start-3 
+          p-4 rounded-xl
 					bg-white bg-opacity-10 backdrop-blur-sm
-					border border-white border-opacity-10"
+					border border-white border-opacity-10`)}
       >
         <div
-          class="prose prose-slate dark:prose-invert max-w-none"
+          class="prose prose-sm md:prose-base prose-slate dark:prose-invert max-w-none"
           set:html={parse(body)}
         />
       </section>
-    </main>
 
-    <aside
-      class="col-span-4 row-span-3 grid grid-cols-subgrid grid-rows-subgrid sticky top-0"
-    >
       <!-- Description -->
       <section
-        class="col-span-4 p-4
-          rounded-xl
+        class={cn(`
+          col-span-full row-span-1 row-start-4 
+          sm:col-span-8 sm:row-start-2 sm:row-span-4 
+          lg:row-span-1 lg:row-start-auto lg:col-span-4 
+          p-4 rounded-xl
           bg-white bg-opacity-10 backdrop-blur-sm
-          border border-white border-opacity-10 min-h-96"
+          border border-white border-opacity-10 min-h-96`)}
       >
         <h1
-          class="white_gradient
-              font-bold bg-clip-text text-transparent text-3xl text-right"
+          class={cn(`white_gradient
+             font-bold bg-clip-text text-transparent text-3xl text-right`)}
         >
           {name}
         </h1>
@@ -103,19 +108,22 @@ const formattedGithubLink = addProtocolToUrl(githubLink);
           {role}
         </p>
         <div
-          class="prose prose-slate dark:prose-invert"
+          class="prose prose-sm md:prose-base prose-slate dark:prose-invert"
           set:html={parse(description)}
         />
       </section>
 
       <!-- Github -->
       <button
-        class="col-span-1
-          rounded-xl relative
+        class={cn(` 
+          row-start-2 col-span-4
+          sm:row-start-auto
+          xl:col-span-1
+          rounded-xl relative p-4
           bg-white bg-opacity-10 backdrop-blur-sm
           border border-white border-opacity-10
           flex justify-center items-center
-          text-white text-opacity-60 hover:text-opacity-90 transition-colors"
+          text-white text-opacity-60 hover:text-opacity-90 transition-colors`)}
       >
         <a
           href={formattedGithubLink}
@@ -127,14 +135,19 @@ const formattedGithubLink = addProtocolToUrl(githubLink);
 
       <!-- Technologies -->
       <section
-        class="col-span-3 row-span-2 p-4
-          rounded-xl
+        class={cn(`
+          col-span-8 row-span-2 row-start-2
+          
+          sm:col-span-4 sm:row-start-3
+          lg:row-span-2  lg:row-start-auto
+          xl:col-span-3 
+          p-4 rounded-xl
           bg-white bg-opacity-10 backdrop-blur-sm
-          border border-white border-opacity-10 h-fit"
+          border border-white border-opacity-10 h-fit`)}
       >
         <h2
-          class="white_gradient
-              font-bold bg-clip-text text-transparent text-xl text-right leading-none"
+          class={cn(`white_gradient
+             font-bod bg-clip-text text-transparent text-xl text-right leading-none`)}
         >
           Технологии на проекте
         </h2>
@@ -145,8 +158,8 @@ const formattedGithubLink = addProtocolToUrl(githubLink);
             technologies.map((t) => (
               <a
                 href={addProtocolToUrl(t.link)}
-                class="text-2xl flex justify-center items-center
-                  text-white text-opacity-60 hover:text-opacity-90 transition-colors"
+                class={cn(`text-2xl flex justify-center items-center
+                 text-white text-opacity-60 hover:text-opacity-90 transition-colors`)}
                 title={t.name}
               >
                 <iconify-icon icon={t.iconifyId} />
@@ -155,6 +168,11 @@ const formattedGithubLink = addProtocolToUrl(githubLink);
           }
         </div>
       </section>
-    </aside>
+    </main>
+
+    <!-- <aside
+      class="row-start-1 row-span-2 col-span-full lg:col-span-4 lg:row-span-3 lg:row-start-auto grid grid-cols-subgrid grid-rows-subgrid lg:sticky top-0"
+    >
+    </aside> -->
   </div>
 </RootLayout>

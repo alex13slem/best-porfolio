@@ -2,7 +2,7 @@ import {
   useEffect,
   type ComponentProps,
   type FC,
-  type HTMLAttributes,
+  type FormHTMLAttributes,
 } from 'react';
 import {
   useForm,
@@ -34,10 +34,11 @@ import { Checkbox } from '../ui/checkbox';
 import DataFormButtons from '../ui/data-form-buttons';
 import { getSlugifyValue } from '../../lib/utils';
 import FormTitle from '../react-hook-form/form-title';
+import { useToast } from '../ui/use-toast';
 
 interface Props
   extends ComponentProps<FC>,
-    HTMLAttributes<HTMLFormElement> {
+    FormHTMLAttributes<HTMLFormElement> {
   method: 'create' | 'edit';
   defaultValues?: SelectProjectTransformed;
   technologies: SelectTechnology[];
@@ -50,6 +51,7 @@ const ProjectForm: FC<Props> = ({
   technologies,
   ...props
 }) => {
+  const { toast } = useToast();
   const technologiesOptions = technologies.map((technology) => ({
     label: technology.name,
     value: technology.id,
@@ -103,7 +105,10 @@ const ProjectForm: FC<Props> = ({
         } project:`,
         result.errors
       );
-      return;
+      return toast({
+        variant: 'destructive',
+        title: 'Не удалось сохранить',
+      });
     }
     navigate('/admin/projects');
   };

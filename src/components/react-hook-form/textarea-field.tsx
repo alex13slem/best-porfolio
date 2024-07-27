@@ -1,10 +1,15 @@
-import type { HTMLAttributes } from 'react';
-import type { Control, FieldError, Path, FieldValues } from 'react-hook-form';
+import type { TextareaHTMLAttributes } from 'react';
+import type {
+  Control,
+  FieldError,
+  Path,
+  FieldValues,
+} from 'react-hook-form';
 import { FormField, FormItem, FormControl } from '../ui/form';
 import { Textarea } from '../ui/textarea';
 
 interface Props<T extends FieldValues>
-  extends HTMLAttributes<HTMLTextAreaElement> {
+  extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   control: Control<T>;
   name: Path<T>;
   label: string;

@@ -2,6 +2,7 @@
 import Button from '@/components/ui/firm-button';
 import SiteLogo from '@/components/site-logo';
 import ContactButton from './contact-button.astro';
+import BuildTriggerButton from './build-trigger-button';
 
 const { pathname } = Astro.url;
 ---
@@ -19,13 +20,16 @@ const { pathname } = Astro.url;
     </div>
     {
       pathname.includes('/admin') ? (
-        <form
-          action="/api/auth/logout"
-          method="post"
-          class="contents"
-        >
-          <Button>Выйти</Button>
-        </form>
+        <div class="flex gap-2">
+          <BuildTriggerButton client:load />
+          <form
+            action="/api/auth/logout"
+            method="post"
+            class="contents"
+          >
+            <Button>Выйти</Button>
+          </form>
+        </div>
       ) : (
         <ContactButton />
       )

@@ -1,10 +1,15 @@
-import type { HTMLAttributes } from 'react';
-import type { Control, FieldError, Path, FieldValues } from 'react-hook-form';
+import type { InputHTMLAttributes } from 'react';
+import type {
+  Control,
+  FieldError,
+  Path,
+  FieldValues,
+} from 'react-hook-form';
 import { FormField, FormItem, FormControl } from '../ui/form';
 import { Input } from '../ui/input';
 
 interface Props<T extends FieldValues>
-  extends HTMLAttributes<HTMLInputElement> {
+  extends InputHTMLAttributes<HTMLInputElement> {
   control: Control<T>;
   name: Path<T>;
   label: string;

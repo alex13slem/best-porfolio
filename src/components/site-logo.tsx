@@ -2,7 +2,9 @@ import type { ComponentProps, FC, HTMLAttributes } from 'react';
 import { twMerge } from 'tailwind-merge';
 import '@/assets/fonts/shadows-into-light-font.css';
 
-interface Props extends ComponentProps<FC>, HTMLAttributes<HTMLSpanElement> {}
+interface Props
+  extends ComponentProps<FC>,
+    HTMLAttributes<HTMLSpanElement> {}
 
 const SiteLogo: FC<Props> = ({ className }) => {
   return (

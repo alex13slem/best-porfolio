@@ -9,6 +9,7 @@ import TableDropdownMenu from '@/components/react-table/table-dropdown-menu';
 import TableDeleteAlert from '@/components/react-table/table-delete-alert';
 import { projectsService } from '@/lib/services/projectsService';
 import type { SelectProject } from '@/db/schema';
+import { useToast } from '../../ui/use-toast';
 
 export const columns: ColumnDef<SelectProject>[] = [
   // Name
@@ -48,6 +49,7 @@ export const columns: ColumnDef<SelectProject>[] = [
   {
     id: 'actions',
     cell: ({ row }) => {
+      const { toast } = useToast();
       const [deleteDialogIsOpen, setDeleteDialogIsOpen] =
         useState<boolean>(false);
 
@@ -61,6 +63,10 @@ export const columns: ColumnDef<SelectProject>[] = [
           }
         } catch (error) {
           console.error('Error deleting project:', error);
+          toast({
+            variant: 'destructive',
+            title: 'Не удалось удалить',
+          });
         }
       };
 

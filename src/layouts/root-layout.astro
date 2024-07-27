@@ -5,7 +5,7 @@ import Header from '@/components/header.astro';
 import Footer from '@/components/footer.astro';
 import '@/styles/app.css';
 import { cn } from '../lib/utils';
-import Head from '../components/head.astro';
+import SiteHead from '../components/site-head.astro';
 
 export interface HtmlProps
   extends Omit<HTMLAttributes<'html'>, 'title'> {
@@ -33,7 +33,7 @@ const {
   transition:animate="initial"
   {...props}
 >
-  <Head {favicon}>
+  <SiteHead {favicon}>
     <slot name="seo" />
     <meta name="referrer" content="origin" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -48,7 +48,7 @@ const {
     />
 
     <ViewTransitions />
-  </Head>
+  </SiteHead>
   <body
     class={cn(
       `relative

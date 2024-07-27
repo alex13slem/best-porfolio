@@ -1,7 +1,7 @@
 ---
 export const prerender = false;
 
-import SEO from '@/components/seo.astro';
+import SEO from '../../components/seo.astro';
 import { createAstroServerClient } from '@/lib/supabase/createAstroServerClient';
 import RootLayout from '../../layouts/root-layout.astro';
 import AuthForm from '@/components/forms/auth-form';
@@ -16,7 +16,12 @@ if (user) {
 ---
 
 <RootLayout>
-  <SEO slot="seo" title="Админка" description="" imageUrls={{ fb: '' }} />
+  <SEO
+    slot="seo"
+    title="Админка"
+    description=""
+    imageUrls={{ fb: '' }}
+  />
   <main>
     <AuthForm type="login" className="mx-auto mt-5" client:load />
   </main>

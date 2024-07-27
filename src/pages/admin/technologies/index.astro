@@ -2,7 +2,7 @@
 export const prerender = false;
 
 import Button from '@/components/ui/firm-button';
-import SEO from '@/components/seo.astro';
+import SEO from '../../../components/seo.astro';
 import AdminLayout from '@/layouts/admin-layout.astro';
 import { createAstroServerClient } from '@/lib/supabase/createAstroServerClient';
 import { getUser } from '@/lib/utils';
@@ -21,11 +21,17 @@ const technologies = await getTechnologies();
 ---
 
 <AdminLayout>
-  <SEO slot="seo" title="Технологии" description="!!!" imageUrls={{ fb: '' }} />
+  <SEO
+    slot="seo"
+    title="Технологии"
+    description="!!!"
+    imageUrls={{ fb: '' }}
+  />
   <div class="flex justify-between items-center">
     <h1 class="text-4xl">Технологии</h1>
     <Button variant={'fill'} className="relative">
-      <a href="/admin/technologies/create" class="absolute inset-0"></a>
+      <a href="/admin/technologies/create" class="absolute inset-0"
+      ></a>
       Добавить технологию
     </Button>
   </div>

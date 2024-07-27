@@ -2,7 +2,7 @@
 import type { GetStaticPaths } from 'astro';
 import { getTechnologies } from '@/lib/drizzle/queries/technologies';
 import RootLayout from '@/layouts/root-layout.astro';
-import SEO from '@/components/seo.astro';
+import SEO from '../../components/seo.astro';
 
 export const getStaticPaths = (async () => {
   const paths = (await getTechnologies()).map((technology) => ({

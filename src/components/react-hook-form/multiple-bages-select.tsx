@@ -1,6 +1,16 @@
 import { useRef, type HTMLAttributes } from 'react';
-import { FormControl, FormField, FormItem, FormLabel } from '../ui/form';
-import type { Control, FieldError, FieldValues, Path } from 'react-hook-form';
+import {
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+} from '../ui/form';
+import type {
+  Control,
+  FieldError,
+  FieldValues,
+  Path,
+} from 'react-hook-form';
 import { Input } from '../ui/input';
 import { Button } from '../ui/button';
 import { Badge } from '../ui/badge';
@@ -9,9 +19,9 @@ import {
   HoverCardContent,
   HoverCardTrigger,
 } from '../ui/hover-card';
-import { cn } from '../../lib/utils';
 
-interface Props<T extends FieldValues> extends HTMLAttributes<HTMLDivElement> {
+interface Props<T extends FieldValues>
+  extends HTMLAttributes<HTMLDivElement> {
   control: Control<T>;
   name: Path<T>;
   placeholder?: string;
@@ -79,7 +89,11 @@ const MultipleBagesSelect = <T extends FieldValues>({
             </div>
             <div className="flex flex-wrap gap-1 mt-2 empty:mt-0">
               {field.value.map((v: string) => (
-                <Badge key={v} deletable onClick={() => removeBadge(field, v)}>
+                <Badge
+                  key={v}
+                  deletable
+                  onClick={() => removeBadge(field, v)}
+                >
                   {v}
                 </Badge>
               ))}

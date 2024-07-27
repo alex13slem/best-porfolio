@@ -1,5 +1,4 @@
 import {
-  useEffect,
   useRef,
   type ComponentProps,
   type FC,

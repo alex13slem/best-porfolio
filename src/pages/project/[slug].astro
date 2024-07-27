@@ -2,15 +2,17 @@
 import type { GetStaticPaths } from 'astro';
 import { getProjectsWithTechnologies } from '@/lib/drizzle/queries/projects';
 import RootLayout from '@/layouts/root-layout.astro';
-import SEO from '@/components/seo.astro';
+import SEO from '../../components/seo.astro';
 import { addProtocolToUrl } from '@/lib/utils';
 import { parse } from 'marked';
 
 export const getStaticPaths = (async () => {
-  const paths = (await getProjectsWithTechnologies()).map((project) => ({
-    params: { slug: project.slug },
-    props: { project },
-  }));
+  const paths = (await getProjectsWithTechnologies()).map(
+    (project) => ({
+      params: { slug: project.slug },
+      props: { project },
+    })
+  );
   return paths;
 }) satisfies GetStaticPaths;
 
@@ -20,7 +22,6 @@ const {
   name,
   description,
   thumbnailGreeting,
-  slug,
   siteLink,
   role,
   githubLink,
@@ -116,8 +117,10 @@ const formattedGithubLink = addProtocolToUrl(githubLink);
           flex justify-center items-center
           text-white text-opacity-60 hover:text-opacity-90 transition-colors"
       >
-        <a href={formattedGithubLink} target="_blank" class="absolute inset-0"
-        ></a>
+        <a
+          href={formattedGithubLink}
+          target="_blank"
+          class="absolute inset-0"></a>
         <iconify-icon icon="octicon:logo-github-16" class="text-xl"
         ></iconify-icon>
       </button>

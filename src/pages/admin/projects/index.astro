@@ -2,7 +2,7 @@
 export const prerender = false;
 
 import Button from '@/components/ui/firm-button';
-import SEO from '@/components/seo.astro';
+import SEO from '../../../components/seo.astro';
 import AdminLayout from '@/layouts/admin-layout.astro';
 import { createAstroServerClient } from '@/lib/supabase/createAstroServerClient';
 import DataTable from '@/components/tables/projects/data-table';
@@ -21,7 +21,12 @@ const projects = await getProjects();
 ---
 
 <AdminLayout>
-  <SEO slot="seo" title="Проекты" description="!!!" imageUrls={{ fb: '' }} />
+  <SEO
+    slot="seo"
+    title="Проекты"
+    description="!!!"
+    imageUrls={{ fb: '' }}
+  />
   <div class="flex justify-between items-center">
     <h1 class="text-4xl">Проекты</h1>
     <Button variant={'fill'} className="relative">

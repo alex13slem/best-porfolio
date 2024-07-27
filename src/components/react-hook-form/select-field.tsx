@@ -5,12 +5,7 @@ import type {
   FieldError,
   Path,
 } from 'react-hook-form';
-import {
-  FormField,
-  FormItem,
-  FormLabel,
-  FormControl,
-} from '../ui/form';
+import { FormField, FormItem, FormControl } from '../ui/form';
 import {
   Select,
   SelectTrigger,

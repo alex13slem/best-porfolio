@@ -28,8 +28,8 @@ const mainInfoData = await getMainInfo();
     noindex
   />
   <MainInfoForm
-    defaultValues={mainInfoData.at(0)}
-    method={mainInfoData.length ? 'edit' : 'create'}
+    defaultValues={mainInfoData}
+    method={mainInfoData ? 'edit' : 'create'}
     client:only="react"
   />
 </AdminLayout>

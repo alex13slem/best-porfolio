@@ -8,7 +8,7 @@ import SectRibbon from '../components/sections/sect-ribbon.astro';
 import SectContacts from '../components/sections/sect-contacts.astro';
 import SeoFragment from '../components/seo-fragment.astro';
 
-const mainInfoData = (await getMainInfo()).at(0)!;
+const mainInfoData = await getMainInfo();
 ---
 
 <RootLayout>

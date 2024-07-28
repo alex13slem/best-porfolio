@@ -1,0 +1,32 @@
+---
+import { getMainInfo } from '../lib/drizzle/queries/main-info';
+import ContactButton from './contact-button.astro';
+import SiteLogo from './site-logo';
+const { email } = await getMainInfo();
+---
+
+<footer class="backdrop-blur">
+  <hr
+    class="border-none h-px opacity-15 bg-gradient-to-r from-transparent via-white to-transparent"
+  />
+  <div
+    class="container flex flex-col md:flex-row justify-between items-center py-4 gap-4"
+  >
+    <div class="flex flex-col gap-2">
+      <a class="contents" href="/">
+        <SiteLogo />
+      </a>
+      <a
+        href={`mailto:${email}`}
+        class="text-white text-opacity-60 font-medium text-sm"
+        >{email}</a
+      >
+      <p class="text-white text-opacity-60 font-medium text-sm">
+        © 2024 alex13slem. Все права защищены.
+      </p>
+    </div>
+    <div class="flex gap-2">
+      <ContactButton class="hidden md:block" />
+    </div>
+  </div>
+</footer>

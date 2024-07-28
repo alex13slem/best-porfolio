@@ -42,7 +42,7 @@ const ProjectCard: FC<Props> = ({ className, project, ...props }) => {
       className={cn(
         `
 				p-[2px] overflow-hidden z-10 
-        rounded-[0.80rem] animate-gradient__rotate 
+        rounded-[0.80rem] animate-gradient__rotate animate-gradient__activeXs
         relative group`,
         className
       )}
@@ -98,7 +98,8 @@ const ProjectCard: FC<Props> = ({ className, project, ...props }) => {
               {technologies.map((t) => (
                 <a
                   key={t.id}
-                  href={`/technology/${t.slug}`}
+                  href={t.link}
+                  target="_blank"
                   className={cn(`
 									text-xl opacity-60 
 									hover:opacity-90 transition-all duration-200

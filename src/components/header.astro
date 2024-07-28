@@ -8,16 +8,11 @@ const { pathname } = Astro.url;
 ---
 
 <header class="sticky top-0 z-30 backdrop-blur">
-  <div
-    class="max-w-7xl mx-auto px-8 py-4 flex justify-between
-  items-center"
-  >
-    <div class="relative">
-      <a class="contents" href="/">
-        <SiteLogo />
-        <span class="absolute inset-0"></span>
-      </a>
-    </div>
+  <div class="container flex justify-between
+  items-center py-4">
+    <a class="contents" href="/">
+      <SiteLogo />
+    </a>
     {
       pathname.includes('/admin') ? (
         <div class="flex gap-2">

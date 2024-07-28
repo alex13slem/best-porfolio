@@ -4,7 +4,7 @@ import thinkAboutThisImg from '@/assets/img/stickers/ThkAbtIt.png';
 import { Image } from 'astro:assets';
 import { getMainInfo } from '@/lib/drizzle/queries/main-info';
 
-const mainInfoData = (await getMainInfo()).at(0)!;
+const mainInfoData = await getMainInfo();
 const { aboutHero } = mainInfoData;
 const textWords = aboutHero.split(' ');
 ---

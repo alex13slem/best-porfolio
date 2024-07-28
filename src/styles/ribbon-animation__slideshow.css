@@ -1,9 +1,9 @@
 .ribbon-animation__slideshow {
-  animation: ribbon-animation__slideshow 30s linear infinite alternate;
+  animation: ribbon-animation__slideshow 40s linear infinite alternate;
 }
 
 @keyframes ribbon-animation__slideshow {
   to {
-    translate: -100%;
+    translate: -50%;
   }
 }

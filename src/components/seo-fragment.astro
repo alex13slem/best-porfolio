@@ -17,7 +17,7 @@ const {
 } = Astro.props;
 
 const siteNameEnv = import.meta.env.SITE_NAME_TAB;
-const mainInfoData = (await getMainInfo()).at(0);
+const mainInfoData = await getMainInfo();
 
 const siteName = siteNameEnv || mainInfoData?.siteName || '';
 const description =

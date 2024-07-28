@@ -1,47 +1,64 @@
-# Astro Starter Kit: Minimal
+# Мой Портфолио Сайт
 
-```sh
-npm create astro@latest -- --template minimal
-```
+Добро пожаловать на мой портфолио сайт, созданный для демонстрации моих навыков и знаний в современных технологиях веб-разработки. Этот проект служит витриной для потенциальных работодателей, показывая, что я способен создавать интерактивные и безопасные веб-приложения.
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/minimal)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/minimal)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/minimal/devcontainer.json)
+## 🌟 Цели и Задачи
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+Основная цель сайта — продемонстрировать мои компетенции в разработке веб-приложений с использованием новейших технологий и подходов.
 
-## 🚀 Project Structure
+## 🚀 Функциональность и Особенности
 
-Inside of your Astro project, you'll see the following folders and files:
+### 📄 Статическая Генерация и Островная Архитектура
 
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+- **SSG (Static Site Generation)** для быстрой загрузки и SEO-оптимизации.
+- **Острова** на базе React, загружаемые динамически (client-load и client-only), обеспечивающие интерактивность.
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+### 🛠️ Административная Панель
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+- **SSR (Server-Side Rendering)** для безопасного управления контентом.
+- **Supabase Auth** для надежной авторизации и защиты административных функций.
+- **React-Hook-Form** и **Zod** для валидации форм как на клиентской, так и на серверной стороне.
 
-Any static assets, like images, can be placed in the `public/` directory.
+### 📦 База Данных и API
 
-## 🧞 Commands
+- **PostgreSQL** с **Drizzle ORM** для удобной работы с данными и их типизацией.
+- **API** в режиме SSR, доступный только для зарегистрированных пользователей.
 
-All commands are run from the root of the project, from a terminal:
+### ☁️ Хостинг и Инфраструктура
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+- **Netlify** для хостинга сайта и автоматического развертывания.
+- **Supabase** для хранения данных и использования CDN для быстрого доступа к контенту.
 
-## 👀 Want to learn more?
+## 🔮 Будущее Развитие
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+В ближайших планах:
+
+- Добавление публичной регистрации и уровней доступа.
+- Расширение функциональности административной панели.
+
+Этот проект является моим живым портфолио, отражающим мой профессиональный рост и стремление к постоянному обучению.
+
+---
+
+Если вам интересно узнать больше или сотрудничать со мной, не стесняйтесь [связаться со мной](https://t.me/alex13slem).
+
+**Спасибо за внимание!**
+
+---
+
+![Astro JS](https://img.shields.io/badge/Astro%20JS-ff5a03?logo=astro&logoColor=fff&style=flat)
+![React](https://img.shields.io/badge/React-61dafb?logo=react&logoColor=fff&style=flat)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-38b2ac?logo=tailwind-css&logoColor=fff&style=flat)
+![Netlify](https://img.shields.io/badge/Netlify-00c7b7?logo=netlify&logoColor=fff&style=flat)
+![Supabase](https://img.shields.io/badge/Supabase-3ecf8e?logo=supabase&logoColor=fff&style=flat)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-336791?logo=postgresql&logoColor=fff&style=flat)
+
+---
+
+🔗 **Репозиторий проекта**: [GitHub](https://github.com/alex13slem/best-porfolio)
+
+📧 **Контакты**: [Email](mailto:a.s.scherba@yandex.by)
+
+---
+
+*Этот проект развернут на бесплатных тарифах Netlify и Supabase.*

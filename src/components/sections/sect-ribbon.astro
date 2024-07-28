@@ -6,7 +6,7 @@ const technologies = await getTechnologies();
 const keywords = technologies.map((tech) => tech.name);
 // const keywords = ['javascript', 'frontend', 'backend', 'developer'];
 
-const keywordsString = (keywords.join(' · ') + ' · ').repeat(4);
+const keywordsString = (keywords.join(' · ') + ' · ').repeat(2);
 ---
 
 <section class="relative py-16 z-20 overflow-clip">
@@ -21,7 +21,7 @@ const keywordsString = (keywords.join(' · ') + ' · ').repeat(4);
 		`)}
   >
     <span
-      class="ribbon-animation__slideshow group-hover:-scale-y-100 transition-all duration-200 tracking-widest block"
+      class="ribbon-animation__slideshow group-hover:-scale-y-100 transition-all duration-200 tracking-widest inline-block"
     >
       {keywordsString}
     </span>

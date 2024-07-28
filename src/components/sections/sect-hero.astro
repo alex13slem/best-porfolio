@@ -6,7 +6,7 @@ import { parse } from 'marked';
 import ContactButton from '../contact-button.astro';
 import { getMainInfo } from '@/lib/drizzle/queries/main-info';
 
-const mainInfoData = (await getMainInfo()).at(0)!;
+const mainInfoData = await getMainInfo();
 const { heroEpithets, heroGreeting } = mainInfoData;
 ---
 

@@ -12,7 +12,7 @@ export default defineConfig({
       nesting: true,
     }),
   ],
-  site: 'http://localhost:4321/',
+  site: 'https://alex13slem.netlify.app/',
   output: 'hybrid',
   adapter: netlify({
     edgeMiddleware: true,
